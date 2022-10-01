@@ -19,18 +19,23 @@ public class User {
     private LocalDate birthDate;
     private String urlImage;
 
+    private LocalDate registrationDate;
+
     @OneToMany(mappedBy = "user")
-    private List<Post> post = new ArrayList<>() ;
+    private List<Post> postList = new ArrayList<>() ;
+    @OneToMany(mappedBy = "user")
+    private List<Comment> commentList = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String name, String email, LocalDate birthDate, String urlImage) {
+    public User(Long id, String name, String email, LocalDate birthDate, String urlImage, LocalDate registrationDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.birthDate = birthDate;
         this.urlImage = urlImage;
+        this.registrationDate = registrationDate;
     }
 
     public Long getId() {
@@ -73,7 +78,19 @@ public class User {
         this.urlImage = urlImage;
     }
 
-    public List<Post> getPost() {
-        return post;
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
     }
 }

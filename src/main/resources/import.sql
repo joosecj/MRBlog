@@ -1,0 +1,1 @@
+INSERT INTO tb_user (name, email, birth_date, url_image, registration_date) values ('Jose Carlos', 'jose@gmail.com', '1990-05-17',  'https://avatars.githubusercontent.com/u/100246121?s=64&v=4', '2022-10-01');
