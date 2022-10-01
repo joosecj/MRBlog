@@ -3,6 +3,8 @@ package com.mr.blog.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user")
@@ -16,6 +18,9 @@ public class User {
     private String email;
     private LocalDate birthDate;
     private String urlImage;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> post = new ArrayList<>() ;
 
     public User() {
     }
@@ -66,5 +71,9 @@ public class User {
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    public List<Post> getPost() {
+        return post;
     }
 }
