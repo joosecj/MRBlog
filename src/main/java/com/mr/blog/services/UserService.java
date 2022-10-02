@@ -37,6 +37,13 @@ public class UserService {
         return new UserDTO(userEntity);
     }
 
+    @Transactional(readOnly = false)
+    public UserDTO update(Long id, UserDTO userDTO) {
+        User userEntity = userRepository.getReferenceById(id);
+        copyDtoToEntity(userDTO, userEntity);
+        return new UserDTO(userRepository.save(userEntity));
+    }
+
     private void copyDtoToEntity(UserDTO userDTO, User userEntity) {
         LocalDate today = LocalDate.now();
         userEntity.setName(userDTO.getName());
