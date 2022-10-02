@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -43,6 +44,10 @@ public class UserService {
         copyDtoToEntity(userDTO, userEntity);
         return new UserDTO(userRepository.save(userEntity));
     }
+    @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
 
     private void copyDtoToEntity(UserDTO userDTO, User userEntity) {
         LocalDate today = LocalDate.now();
@@ -52,5 +57,4 @@ public class UserService {
         userEntity.setUrlImage(userDTO.getUrlImage());
         userEntity.setRegistrationDate(today);
     }
-
 }
