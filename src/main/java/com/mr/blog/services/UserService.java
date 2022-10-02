@@ -5,6 +5,8 @@ import com.mr.blog.entities.User;
 import com.mr.blog.repositories.UserRepository;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,12 @@ public class UserService {
     public UserDTO findById(long id) {
        User userEntity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
         return new UserDTO(userEntity);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<UserDTO> findAll(Pageable pageable) {
+        Page<User> userPage = userRepository.findAll(pageable);
+        return userPage.map(UserDTO::new);
     }
 
     @Transactional(readOnly = false)
