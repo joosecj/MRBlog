@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 @Service
 public class UserService {
@@ -21,5 +21,21 @@ public class UserService {
         return new UserDTO(userEntity);
     }
 
+    @Transactional(readOnly = false)
+    public UserDTO insetUser(UserDTO userDTO) {
+        User userEntity = new User();
+        copyDtoToEntity(userDTO, userEntity);
+        userRepository.save(userEntity);
+        return new UserDTO(userEntity);
+    }
+
+    private void copyDtoToEntity(UserDTO userDTO, User userEntity) {
+        LocalDate today = LocalDate.now();
+        userEntity.setName(userDTO.getName());
+        userEntity.setEmail(userDTO.getEmail());
+        userEntity.setBirthDate(userDTO.getBirthDate());
+        userEntity.setUrlImage(userDTO.getUrlImage());
+        userEntity.setRegistrationDate(today);
+    }
 
 }

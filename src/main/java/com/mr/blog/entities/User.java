@@ -18,7 +18,6 @@ public class User {
     private String email;
     private LocalDate birthDate;
     private String urlImage;
-
     private LocalDate registrationDate;
 
     @OneToMany(mappedBy = "user")
