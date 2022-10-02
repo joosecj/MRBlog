@@ -3,8 +3,13 @@ package com.mr.blog.services;
 import com.mr.blog.dto.UserDTO;
 import com.mr.blog.entities.User;
 import com.mr.blog.repositories.UserRepository;
+import com.mr.blog.services.exeptions.DataBaseException;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,7 +25,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDTO findById(long id) {
-       User userEntity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
+        User userEntity = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
         return new UserDTO(userEntity);
     }
 
@@ -32,21 +37,38 @@ public class UserService {
 
     @Transactional(readOnly = false)
     public UserDTO insetUser(UserDTO userDTO) {
-        User userEntity = new User();
-        copyDtoToEntity(userDTO, userEntity);
-        userRepository.save(userEntity);
-        return new UserDTO(userEntity);
+        try {
+            User userEntity = new User();
+            copyDtoToEntity(userDTO, userEntity);
+            userRepository.save(userEntity);
+            return new UserDTO(userEntity);
+        } catch (ConstraintViolationException e) {
+            throw new ResourceNotFoundException("E-mail já cadastrado");
+        }
+
     }
 
     @Transactional(readOnly = false)
     public UserDTO update(Long id, UserDTO userDTO) {
-        User userEntity = userRepository.getReferenceById(id);
-        copyDtoToEntity(userDTO, userEntity);
-        return new UserDTO(userRepository.save(userEntity));
+        try {
+            User userEntity = userRepository.getReferenceById(id);
+            copyDtoToEntity(userDTO, userEntity);
+            return new UserDTO(userRepository.save(userEntity));
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Usuário não encontrado");
+        }
+
     }
+
     @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException("Usuário não encontrado");
+        } catch (DataIntegrityViolationException e) {
+            throw new DataBaseException("Falha de integridade refencial");
+        }
     }
 
     private void copyDtoToEntity(UserDTO userDTO, User userEntity) {
