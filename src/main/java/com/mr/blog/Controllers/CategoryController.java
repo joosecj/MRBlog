@@ -1,7 +1,6 @@
 package com.mr.blog.Controllers;
 
 import com.mr.blog.dto.CategoryDTO;
-import com.mr.blog.dto.UserDTO;
 import com.mr.blog.services.CategoryServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +34,10 @@ public class CategoryController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(categoryDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(categoryDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @Valid @RequestBody CategoryDTO categoryDTO) {
+        return ResponseEntity.ok(categoryServices.update(id, categoryDTO));
     }
 }

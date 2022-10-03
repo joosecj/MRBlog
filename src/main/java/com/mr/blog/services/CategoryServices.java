@@ -1,11 +1,10 @@
 package com.mr.blog.services;
 
 import com.mr.blog.dto.CategoryDTO;
-import com.mr.blog.dto.UserDTO;
 import com.mr.blog.entities.Category;
-import com.mr.blog.entities.User;
 import com.mr.blog.repositories.CategoryRepository;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,6 +39,17 @@ public class CategoryServices {
             return new CategoryDTO(categoryEntity);
         } catch (ConstraintViolationException e) {
             throw new ResourceNotFoundException("E-mail já cadastrado");
+        }
+    }
+
+    @Transactional(readOnly = false)
+    public CategoryDTO update(Long id, CategoryDTO categoryDTO) {
+        try {
+            Category categoryEntity = categoryRepository.getReferenceById(id);
+            copyDtoToEntity(categoryDTO, categoryEntity);
+            return new CategoryDTO(categoryRepository.save(categoryEntity));
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Usuário não encontrado");
         }
     }
 
