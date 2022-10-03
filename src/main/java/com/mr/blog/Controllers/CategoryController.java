@@ -40,4 +40,10 @@ public class CategoryController {
     public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @Valid @RequestBody CategoryDTO categoryDTO) {
         return ResponseEntity.ok(categoryServices.update(id, categoryDTO));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        categoryServices.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
