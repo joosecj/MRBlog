@@ -1,9 +1,12 @@
 package com.mr.blog.Controllers;
 
 import com.mr.blog.dto.CategoryDTO;
+import com.mr.blog.dto.UserDTO;
 import com.mr.blog.services.CategoryServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,6 +22,11 @@ public class CategoryController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryServices.findById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(categoryServices.findAll(pageable));
     }
 
     @PostMapping("/news")
