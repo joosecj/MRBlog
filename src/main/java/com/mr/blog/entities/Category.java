@@ -13,8 +13,8 @@ public class Category {
     private Long id;
     @Column(unique = true)
     private String name;
-    @Column(length = 30)
-    private String Description;
+    @Column(length = 50)
+    private String description;
 
     @OneToMany(mappedBy = "category")
     private List<Post> postList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Category {
     public Category(Long id, String name, String description) {
         this.id = id;
         this.name = name;
-        Description = description;
+        this.description = description;
     }
 
     public Long getId() {
@@ -45,10 +45,10 @@ public class Category {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 }

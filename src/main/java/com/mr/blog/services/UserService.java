@@ -36,7 +36,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = false)
-    public UserDTO insetUser(UserDTO userDTO) {
+    public UserDTO insert(UserDTO userDTO) {
         try {
             User userEntity = new User();
             copyDtoToEntity(userDTO, userEntity);
@@ -45,7 +45,6 @@ public class UserService {
         } catch (ConstraintViolationException e) {
             throw new ResourceNotFoundException("E-mail já cadastrado");
         }
-
     }
 
     @Transactional(readOnly = false)
@@ -57,7 +56,6 @@ public class UserService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Usuário não encontrado");
         }
-
     }
 
     @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)

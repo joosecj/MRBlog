@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("/new")
     public ResponseEntity<UserDTO> inset(@Valid @RequestBody UserDTO userDTO) {
-        userDTO = userService.insetUser(userDTO);
+        userDTO = userService.insert(userDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(userDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(userDTO);
