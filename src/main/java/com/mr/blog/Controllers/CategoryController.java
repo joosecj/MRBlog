@@ -5,19 +5,21 @@ import com.mr.blog.services.CategoryServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/category")
+@RequestMapping(value = "/categories")
 public class CategoryController {
     @Autowired
     private CategoryServices categoryServices;
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(categoryServices.findById(id));
+    }
 
     @PostMapping("/news")
     public ResponseEntity<CategoryDTO> inset(@Valid @RequestBody CategoryDTO categoryDTO) {

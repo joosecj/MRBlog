@@ -15,6 +15,12 @@ public class CategoryServices {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Transactional(readOnly = true)
+    public CategoryDTO findById(long id) {
+        Category categoryEntity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+        return new CategoryDTO(categoryEntity);
+    }
+
     @Transactional(readOnly = false)
     public CategoryDTO insert(CategoryDTO categoryDTO) {
         try {
