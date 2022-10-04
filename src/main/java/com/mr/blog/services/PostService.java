@@ -1,6 +1,8 @@
 package com.mr.blog.services;
 
+import com.mr.blog.dto.CategoryDTO;
 import com.mr.blog.dto.PostCategoryUserDTO;
+import com.mr.blog.dto.PostDTO;
 import com.mr.blog.entities.Category;
 import com.mr.blog.entities.Post;
 import com.mr.blog.entities.User;
@@ -10,6 +12,8 @@ import com.mr.blog.repositories.UserRepository;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +30,13 @@ public class PostService {
 
     @Autowired
     private UserRepository userRepository;
+
+
+    @Transactional(readOnly = true)
+    public Page<PostCategoryUserDTO> findAll(Pageable pageable) {
+        Page<Post> postPage = postRepository.findAll(pageable);
+        return postPage.map(PostCategoryUserDTO::new);
+    }
 
     @Transactional(readOnly = false)
     public PostCategoryUserDTO insert(PostCategoryUserDTO postCategoryUserDTO) {
