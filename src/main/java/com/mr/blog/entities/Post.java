@@ -12,13 +12,13 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 10)
-    private String title;
     @Column(length = 20)
+    private String title;
+    @Column(length = 50)
     private String titleDescription;
     @Lob @Basic(fetch = FetchType.LAZY)
     private String description;
-    private LocalDateTime DateTime;
+    private LocalDateTime dateTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,7 +35,7 @@ public class Post {
         this.title = title;
         this.titleDescription = titleDescription;
         this.description = description;
-        DateTime = dateTime;
+        this.dateTime = dateTime;
         this.user = user;
     }
 
@@ -72,11 +72,11 @@ public class Post {
     }
 
     public LocalDateTime getDateTime() {
-        return DateTime;
+        return dateTime;
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        DateTime = dateTime;
+        this.dateTime = dateTime;
     }
 
     public User getUser() {
@@ -89,5 +89,13 @@ public class Post {
 
     public List<Comment> getCommentList() {
         return commentList;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
