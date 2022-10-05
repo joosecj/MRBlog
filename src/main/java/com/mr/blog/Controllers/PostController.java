@@ -47,4 +47,10 @@ public class PostController {
     public ResponseEntity<PostCategoryDTO> update(@PathVariable Long id, @Valid @RequestBody PostCategoryDTO postCategoryDTO) {
         return ResponseEntity.ok(postService.update(id, postCategoryDTO));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        postService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
