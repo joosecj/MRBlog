@@ -9,6 +9,8 @@ import com.mr.blog.repositories.PostRepository;
 import com.mr.blog.repositories.UserRepository;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,12 @@ public class CommentService {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Transactional(readOnly = true)
+    public Page<CommentPostUserDTO> findAll(Pageable pageable) {
+        Page<Comment> commentPage = commentRepository.findAll(pageable);
+        return commentPage.map(CommentPostUserDTO::new);
+    }
 
     @Transactional(readOnly = false)
     public CommentPostUserDTO insert(CommentPostUserDTO commentPostUserDTO) {
