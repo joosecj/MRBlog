@@ -1,8 +1,7 @@
 package com.mr.blog.entities;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table(name = "tb_comment")
@@ -10,8 +9,10 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 200)
     private String commentDescription;
-    private LocalDateTime dateTime;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private Instant dateTime;
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
@@ -23,7 +24,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Long id, String commentDescription, LocalDateTime dateTime) {
+    public Comment(Long id, String commentDescription, Instant dateTime) {
         this.id = id;
         this.commentDescription = commentDescription;
         this.dateTime = dateTime;
@@ -45,11 +46,11 @@ public class Comment {
         this.commentDescription = commentDescription;
     }
 
-    public LocalDateTime getDateTime() {
+    public Instant getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Instant dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -59,5 +60,13 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
