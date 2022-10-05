@@ -1,5 +1,6 @@
 package com.mr.blog.Controllers;
 
+import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.CommentPostUserDTO;
 import com.mr.blog.services.CommentService;
 import jakarta.validation.Valid;
@@ -17,6 +18,12 @@ import java.net.URI;
 public class CommentController {
     @Autowired
     private CommentService commentService;
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CommentDTO> findById(@PathVariable Long id) {
+        CommentDTO dto = commentService.findById(id);
+        return ResponseEntity.ok(dto);
+    }
 
     @GetMapping
     public ResponseEntity<Page<CommentPostUserDTO>> findAll(Pageable pageable) {

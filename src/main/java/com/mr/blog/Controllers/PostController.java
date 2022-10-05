@@ -1,5 +1,6 @@
 package com.mr.blog.Controllers;
 
+import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.PostCategoryDTO;
 import com.mr.blog.dto.PostCategoryUserDTO;
 import com.mr.blog.dto.PostDTO;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/posts")
@@ -33,6 +35,12 @@ public class PostController {
     @GetMapping
     public ResponseEntity<Page<PostCategoryUserDTO>> findAll(Pageable pageable) {
         return ResponseEntity.ok(postService.findAll(pageable));
+    }
+
+    @GetMapping(value = "/{id}/comments")
+    public ResponseEntity<List<CommentDTO>> findAccountByMovements(@PathVariable Long id) {
+        List<CommentDTO> commentDTOList = postService.findPostByComments(id);
+        return ResponseEntity.ok(commentDTOList);
     }
 
     @PostMapping

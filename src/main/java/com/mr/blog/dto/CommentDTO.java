@@ -26,6 +26,7 @@ public class CommentDTO {
     public CommentDTO(Comment commentEntity) {
         id = commentEntity.getId();
         commentDescription = commentEntity.getCommentDescription();
+        dateTime = commentEntity.getDateTime();
     }
 
     public String getCommentDescription() {

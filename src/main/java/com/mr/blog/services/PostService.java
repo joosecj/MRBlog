@@ -1,9 +1,11 @@
 package com.mr.blog.services;
 
+import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.PostCategoryDTO;
 import com.mr.blog.dto.PostCategoryUserDTO;
 import com.mr.blog.dto.PostDTO;
 import com.mr.blog.entities.Category;
+import com.mr.blog.entities.Comment;
 import com.mr.blog.entities.Post;
 import com.mr.blog.entities.User;
 import com.mr.blog.repositories.CategoryRepository;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class PostService {
@@ -51,14 +54,23 @@ public class PostService {
         return postPage.map(PostCategoryUserDTO::new);
     }
 
+    @Transactional(readOnly = true)
+    public List<CommentDTO> findPostByComments(Long id) {
+        Post postEntity = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        List<Comment> commentPage = postEntity.getCommentList();
+        return commentPage.stream().map(x -> new CommentDTO(x)).toList();
+    }
+
     @Transactional(readOnly = false)
     public PostCategoryUserDTO insert(PostCategoryUserDTO postCategoryUserDTO) {
         try {
             Post postEntity = new Post();
             copyDtoToEntity(postCategoryUserDTO, postEntity);
-            Category categoryEntity = categoryRepository.findById(postCategoryUserDTO.getCategory().getId()).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+            Category categoryEntity = categoryRepository.findById(postCategoryUserDTO.getCategory().getId()).orElseThrow(()
+                    -> new ResourceNotFoundException("Recurso não encontrado"));
             categoryRepository.save(categoryEntity);
-            User userEntity = userRepository.findById(postCategoryUserDTO.getUser().getId()).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+            User userEntity = userRepository.findById(postCategoryUserDTO.getUser().getId()).orElseThrow(()
+                    -> new ResourceNotFoundException("Recurso não encontrado"));
             userRepository.save(userEntity);
             postEntity.setCategory(categoryEntity);
             postEntity.setUser(userEntity);
