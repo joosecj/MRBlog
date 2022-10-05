@@ -4,24 +4,24 @@ import com.mr.blog.entities.Post;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class PostCategoryUserDTO {
     private Long id;
     @Size(min = 10, max = 30, message = "Título precisar ter mínimo 10 e máximo 30 caracteres")
     @NotBlank(message = "Campo requerido")
     private String title;
-    @Size(min = 10, max = 50, message = "Título descrição precisar ter mínimo 10 e máximo 50 caracteres")
+    @Size(min = 10, max = 40, message = "Descrição do título precisar ter mínimo 10 e máximo 40 caracteres")
     @NotBlank(message = "Campo requerido")
     private String titleDescription;
-    @Size(min = 20, max = 30, message = "Descrição precisar ter mínimo 50 caracteres")
+    @Size(min = 20, message = "Descrição precisar ter mínimo 20 caracteres")
     @NotBlank(message = "Campo requerido")
     private String description;
-    private LocalDateTime dateTime;
+    private Instant dateTime;
     private CategoryDTO category;
     private UserDTO user;
 
-    public PostCategoryUserDTO(Long id, String title, String titleDescription, String description, LocalDateTime dateTime, CategoryDTO category, UserDTO user) {
+    public PostCategoryUserDTO(Long id, String title, String titleDescription, String description, Instant dateTime, CategoryDTO category, UserDTO user) {
         this.id = id;
         this.title = title;
         this.titleDescription = titleDescription;
@@ -35,6 +35,7 @@ public class PostCategoryUserDTO {
         id = postEntity.getId();
         title = postEntity.getTitle();
         titleDescription = postEntity.getTitleDescription();
+        description = postEntity.getDescription();
         dateTime = postEntity.getDateTime();
         category = new CategoryDTO(postEntity.getCategory());
         user = new UserDTO(postEntity.getUser());
@@ -57,7 +58,7 @@ public class PostCategoryUserDTO {
         return description;
     }
 
-    public LocalDateTime getDateTime() {
+    public Instant getDateTime() {
         return dateTime;
     }
 

@@ -1,6 +1,7 @@
 package com.mr.blog.services;
 
 import com.mr.blog.dto.CategoryDTO;
+import com.mr.blog.dto.PostDTO;
 import com.mr.blog.entities.Category;
 import com.mr.blog.repositories.CategoryRepository;
 import com.mr.blog.services.exeptions.DataBaseException;
@@ -27,6 +28,7 @@ public class CategoryServices {
         Category categoryEntity = categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
         return new CategoryDTO(categoryEntity);
     }
+
 
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAll(Pageable pageable) {

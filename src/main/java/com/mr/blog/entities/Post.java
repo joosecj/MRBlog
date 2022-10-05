@@ -1,8 +1,7 @@
 package com.mr.blog.entities;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,8 @@ public class Post {
     private String titleDescription;
     @Lob @Basic(fetch = FetchType.LAZY)
     private String description;
-    private LocalDateTime dateTime;
+    @Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private Instant dateTime;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -31,7 +31,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String titleDescription, String description, LocalDateTime dateTime, User user) {
+    public Post(String title, String titleDescription, String description, Instant dateTime, User user) {
         this.title = title;
         this.titleDescription = titleDescription;
         this.description = description;
@@ -71,11 +71,11 @@ public class Post {
         this.description = description;
     }
 
-    public LocalDateTime getDateTime() {
+    public Instant getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Instant dateTime) {
         this.dateTime = dateTime;
     }
 
