@@ -54,7 +54,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<CommentUserDTO> findPostByComments(Long id) {
         Post postEntity = postRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Recurso não encontrado"));
+                -> new ResourceNotFoundException("Post não encontrado"));
         List<Comment> commentPage = postEntity.getCommentList();
         return commentPage.stream().map(x -> new CommentUserDTO(x)).toList();
     }
@@ -65,10 +65,10 @@ public class PostService {
             Post postEntity = new Post();
             copyDtoToEntity(postCategoryUserDTO, postEntity);
             Category categoryEntity = categoryRepository.findById(postCategoryUserDTO.getCategory().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Recurso não encontrado"));
+                    -> new ResourceNotFoundException("Caategoria não encontrado"));
             categoryRepository.save(categoryEntity);
             User userEntity = userRepository.findById(postCategoryUserDTO.getUser().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Recurso não encontrado"));
+                    -> new ResourceNotFoundException("Usuário não encontrado"));
             userRepository.save(userEntity);
             postEntity.setCategory(categoryEntity);
             postEntity.setUser(userEntity);
