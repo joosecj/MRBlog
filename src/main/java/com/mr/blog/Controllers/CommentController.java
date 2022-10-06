@@ -1,5 +1,6 @@
 package com.mr.blog.Controllers;
 
+import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.CommentPostUserDTO;
 import com.mr.blog.services.CommentService;
 import jakarta.validation.Valid;
@@ -35,5 +36,10 @@ public class CommentController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(commentPostUserDTO.getId()).toUri();
         return ResponseEntity.created(uri).body(commentPostUserDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CommentDTO> update(@PathVariable Long id, @Valid @RequestBody CommentDTO commentDTO) {
+        return ResponseEntity.ok(commentService.update(id, commentDTO));
     }
 }

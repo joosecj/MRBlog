@@ -1,4 +1,5 @@
 package com.mr.blog.services;
+import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.CommentPostUserDTO;
 import com.mr.blog.entities.Comment;
 import com.mr.blog.entities.Post;
@@ -7,6 +8,7 @@ import com.mr.blog.repositories.CommentRepository;
 import com.mr.blog.repositories.PostRepository;
 import com.mr.blog.repositories.UserRepository;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +28,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public CommentPostUserDTO findById(long id) {
         Comment commentEntity = commentRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Recurso não encontrado"));
+                -> new ResourceNotFoundException("Comentário não encontrado"));
         return new CommentPostUserDTO(commentEntity);
     }
 
@@ -41,16 +43,29 @@ public class CommentService {
             Comment commentEntity = new Comment();
             copyDtoToEntity(commentPostUserDTO, commentEntity);
             Post postEntity = postRepository.findById(commentPostUserDTO.getPost().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Recurso não encontrado"));
+                    -> new ResourceNotFoundException("Post não encontrado"));
             postRepository.save(postEntity);
             User userEntity = userRepository.findById(commentPostUserDTO.getUser().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Recurso não encontrado"));
+                    -> new ResourceNotFoundException("Usuário não encontrado"));
             userRepository.save(userEntity);
             commentEntity.setPost(postEntity);
             commentEntity.setUser(userEntity);
             commentEntity = commentRepository.save(commentEntity);
             return new CommentPostUserDTO(commentEntity);
     }
+
+    @Transactional(readOnly = false)
+    public CommentDTO update(Long id, CommentDTO commentDTO) {
+        try {
+            Comment commentEntity = commentRepository.getReferenceById(id);
+            commentEntity.setCommentDescription(commentDTO.getCommentDescription());
+            commentEntity.setDateTime(Instant.now());
+            return new CommentDTO(commentRepository.save(commentEntity));
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Post não encontrado");
+        }
+    }
+
 
     private void copyDtoToEntity(CommentPostUserDTO commentPostUserDTO, Comment commentEntity) {
         commentEntity.setCommentDescription(commentPostUserDTO.getCommentDescription());
