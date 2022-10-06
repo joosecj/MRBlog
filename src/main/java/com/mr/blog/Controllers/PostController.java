@@ -1,9 +1,6 @@
 package com.mr.blog.Controllers;
 
-import com.mr.blog.dto.CommentDTO;
-import com.mr.blog.dto.PostCategoryDTO;
-import com.mr.blog.dto.PostCategoryUserDTO;
-import com.mr.blog.dto.PostDTO;
+import com.mr.blog.dto.*;
 import com.mr.blog.services.PostService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +35,9 @@ public class PostController {
     }
 
     @GetMapping(value = "/{id}/comments")
-    public ResponseEntity<List<CommentDTO>> findAccountByMovements(@PathVariable Long id) {
-        List<CommentDTO> commentDTOList = postService.findPostByComments(id);
-        return ResponseEntity.ok(commentDTOList);
+    public ResponseEntity<List<CommentUserDTO>> findAccountByMovements(@PathVariable Long id) {
+        List<CommentUserDTO> commentUserDTOS = postService.findPostByComments(id);
+        return ResponseEntity.ok(commentUserDTOS);
     }
 
     @PostMapping

@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.Instant;
 
 @Service
@@ -25,6 +24,13 @@ public class CommentService {
     private UserRepository userRepository;
 
     @Transactional(readOnly = true)
+    public CommentPostUserDTO findById(long id) {
+        Comment commentEntity = commentRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("Recurso não encontrado"));
+        return new CommentPostUserDTO(commentEntity);
+    }
+
+    @Transactional(readOnly = true)
     public Page<CommentPostUserDTO> findAll(Pageable pageable) {
         Page<Comment> commentPage = commentRepository.findAll(pageable);
         return commentPage.map(CommentPostUserDTO::new);
@@ -34,9 +40,11 @@ public class CommentService {
     public CommentPostUserDTO insert(CommentPostUserDTO commentPostUserDTO) {
             Comment commentEntity = new Comment();
             copyDtoToEntity(commentPostUserDTO, commentEntity);
-            Post postEntity = postRepository.findById(commentPostUserDTO.getPost().getId()).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+            Post postEntity = postRepository.findById(commentPostUserDTO.getPost().getId()).orElseThrow(()
+                    -> new ResourceNotFoundException("Recurso não encontrado"));
             postRepository.save(postEntity);
-            User userEntity = userRepository.findById(commentPostUserDTO.getUser().getId()).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+            User userEntity = userRepository.findById(commentPostUserDTO.getUser().getId()).orElseThrow(()
+                    -> new ResourceNotFoundException("Recurso não encontrado"));
             userRepository.save(userEntity);
             commentEntity.setPost(postEntity);
             commentEntity.setUser(userEntity);

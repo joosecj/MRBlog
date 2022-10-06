@@ -1,6 +1,5 @@
 package com.mr.blog.Controllers;
 
-import com.mr.blog.dto.CommentDTO;
 import com.mr.blog.dto.CommentPostUserDTO;
 import com.mr.blog.services.CommentService;
 import jakarta.validation.Valid;
@@ -20,9 +19,9 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CommentDTO> findById(@PathVariable Long id) {
-        CommentDTO dto = commentService.findById(id);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<CommentPostUserDTO> findById(@PathVariable Long id) {
+        CommentPostUserDTO commentPostUserDTO = commentService.findById(id);
+        return ResponseEntity.ok(commentPostUserDTO);
     }
 
     @GetMapping
