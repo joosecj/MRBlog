@@ -1,0 +1,53 @@
+.dsplaygames-pagination-container {
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dsplaygames-pagination-box {
+    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dsplaygames-pagination-box form {
+    width: 100%;
+    display: flex;
+}
+
+.dsplaygames-pagination-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-primary);
+    cursor: pointer;
+}
+
+.dsplaygames-pagination-button svg {
+    filter: brightness(0) saturate(100%) invert(26%) sepia(19%) saturate(7395%) hue-rotate(234deg) brightness(89%) contrast(92%);
+}
+
+.dsplaygames-pagination-button:disabled {
+    border: 1px solid #c2c2c2;
+    cursor: unset;
+}
+
+.dsplaygames-pagination-button:disabled svg {
+    filter: none;
+}
+
+.dsplaygames-pagination-container p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-primary);
+}
+
+.dsplaygames-flip-horizontal {
+    transform: rotate(180deg);
+}
