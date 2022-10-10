@@ -4,14 +4,14 @@ import './styles.css';
 function Pagination() {
 
     return (
-        <div className="dsplaygames-pagination-container">
-            <div className="dsplaygames-pagination-box">
-                <button className="dsplaygames-pagination-button" disabled={true} >
+        <div className="mrblog-pagination-container">
+            <div className="mrblog-pagination-box">
+                <button className="mrblog-pagination-button" disabled={true} >
                     <Arrow />
                 </button>
                 <p>{`${1} de ${3}`}</p>
-                <button className="dsplaygames-pagination-button" disabled={false} >
-                    <Arrow className="dsplaygames-flip-horizontal" />
+                <button className="mrblog-pagination-button" disabled={false} >
+                    <Arrow className="mrblog-flip-horizontal" />
                 </button>
             </div>
         </div>
