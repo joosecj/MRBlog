@@ -17,13 +17,13 @@ function BlogCard({ blog } : Props){
             <p className="mrblog-date">{blog.dateTime}</p>
             <div className="mrblog-card-description">
               <p>{blog.description}</p>
-              <Link to={'/form/${blog.id}'}>
+              <Link to={`/post/${blog.id}`}>
                 <div className="btn btn-primary mrblog-btn">Ler mais</div>
               </Link>
             </div>
           </div>
         </div>
-      </div>
+        </div>
     )
 
 }

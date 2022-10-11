@@ -1,5 +1,4 @@
 import { ReactComponent as Arrow } from 'assets/img/arrow.svg';
-import { type } from 'os';
 import { BlogPage } from 'types/blog';
 import './styles.css';
 

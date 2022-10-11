@@ -38,11 +38,10 @@ function Listing() {
       <h1 className="news-title">Últimas notícias</h1>
       <section id="news">
         {page.content.map(blog => (
-          <div key={blog.id} className="teste">
+          <div key={blog.id} className="mrblog-container">
             <BlogCard blog={blog}/>
           </div>
         ))}
-       
         <Pagination page={page} onChange={handlePageChance} />
       </section></>
     );
