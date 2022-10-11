@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
+:root{
+  --text-green-water:#38AF90;
+  --text-gray:#797979;
+  --text-light-pink:#DD7E92;
+  --text-white: #fff;
+  --bg-light-gray: #F0F0F0;
+  --bg-light-pink:#DD7E92;
+  --bg-black: #383838;
+  --bg-green-water:#38AF90;
+  --bg-white: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html, body {
+    background-color: var(--bg-white);
+}
+
+a, a:hover {
+  text-decoration: none;
+  color: unset;
+}
