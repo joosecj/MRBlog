@@ -11,9 +11,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 30)
+    @Column(length = 80)
     private String title;
-    @Column(length = 50)
+    @Column(length = 100)
     private String titleDescription;
     @Lob @Basic(fetch = FetchType.LAZY)
     private String description;

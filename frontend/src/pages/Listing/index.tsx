@@ -3,26 +3,47 @@ import BlogCard from 'components/BlogCard';
 import Pagination from 'components/Pagination';
 import { useEffect, useState } from 'react';
 import { BlogPage } from "types/blog";
+import { BASE_URL } from "utils/requests";
 import'./styles.css';
 
 function Listing() {
   const [pageNumber, setPageNumber] = useState(0);
 
+  const [page, setPage] = useState<BlogPage>({
+    content: [],
+    last: true,
+    totalPages: 0,
+    totalElements: 0,
+    size: 10,
+    number: 0,
+    first: true,
+    numberOfElements: 0,
+    empty: true,
+});
+
   useEffect(() => {
-    axios.get(`$BASE_URL}/posts/posts?size=10&page=1&sort=title`)
+    axios.get(`${BASE_URL}/posts?size=10&page=${pageNumber}&sort=title`)
     .then(response => {
       const data = response.data as BlogPage;
-      console.log(data);
-      setPageNumber(data.number);
+      setPage(data);
     });
-  },[]);
+  },[pageNumber]);
+
+  const handlePageChance = (newPageNumber : number) => {
+    setPageNumber(newPageNumber)
+  }
 
     return (
-      <><h1 className="news-title">Últimas notícias</h1>
+      <>
+      <h1 className="news-title">Últimas notícias</h1>
       <section id="news">
-        <BlogCard />
-        <p>{pageNumber}</p>
-        <Pagination />
+        {page.content.map(blog => (
+          <div key={blog.id} className="teste">
+            <BlogCard blog={blog}/>
+          </div>
+        ))}
+       
+        <Pagination page={page} onChange={handlePageChance} />
       </section></>
     );
 }
