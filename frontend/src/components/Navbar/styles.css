@@ -1,15 +1,3 @@
-:root{
-    --text-green-water:#38AF90;
-    --text-gray:#797979;
-    --text-light-pink:#DD7E92;
-    --text-white: #fff;
-    --bg-light-gray: #F0F0F0;
-    --bg-light-pink:#DD7E92;
-    --bg-black: #383838;
-    --bg-green-water:#38AF90;
-    --bg-white: #fff;
-  }
-
 header {
     background-color: var(--bg-green-water);
     width: 100%;
@@ -26,7 +14,7 @@ nav {
 }
 
 .nav-brand {
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 700;
     line-height: 36px;
     color: var(--text-white);
@@ -41,16 +29,5 @@ nav {
     padding: 0;
     align-items: center;
     color: var(--text-white);
-    
-}
-
-.menu-items a {
-    color: var(--text-white);
-    text-decoration: none;
-    display: none;  
-    opacity: -1;
-}
-
-.menu-items img {
-    width: 62px;
+    font-size: 1.5rem; 
 }
