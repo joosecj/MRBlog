@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { Blog } from 'types/blog';
 import { BASE_URL } from 'utils/requests';
@@ -26,6 +27,9 @@ function PostCard({ postId } : Props) {
             <p className="mrblog-date">{post?.dateTime}</p>
             <div className="mrblog-card-description">
               <p>{post?.description}</p>
+              <Link to='/'>
+                <div className="btn btn-primary mrblog-btn">Voltar</div>
+              </Link>
             </div>
           </div>
         </div>
