@@ -4,6 +4,20 @@ export type Blog = {
     titleDescription: string;
     description: string;
     dateTime: string;
+    category: {
+        id: number;
+        name: string;
+        description: string;
+        },
+        user: {
+            id: number;
+            name: string;
+            email: string;
+            birthDate: string;
+            urlImage: string
+            registrationDate: string;
+        }
+    
 }
 
 export type BlogPage = {

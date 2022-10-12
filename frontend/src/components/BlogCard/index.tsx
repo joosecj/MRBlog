@@ -14,13 +14,12 @@ function BlogCard({ blog } : Props){
           <div className="mrblog-card">
           <Link to={`/post/${blog.id}`}>
           <h2>{blog.title}</h2>
+          </Link>
             <p className="mrblog-line">{blog.titleDescription}</p>
-            <p className="mrblog-date">{blog.dateTime}</p>
+            <p className="mrblog-date">Autor - {blog.user.name} | Categoria - {blog.category.name} | Criado em {blog.dateTime}</p>
             <div className="mrblog-card-description">
               <p>{blog.description}</p>
             </div>
-          </Link>
-           
           </div>
         </div>
         </div>
