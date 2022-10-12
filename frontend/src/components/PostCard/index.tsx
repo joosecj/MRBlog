@@ -27,6 +27,10 @@ function PostCard({ postId } : Props) {
             <p className="mrblog-date">{post?.dateTime}</p>
             <div className="mrblog-card-description">
               <p>{post?.description}</p>
+              <div className="teste">
+                <p>{post?.user.name}</p>
+                <img className="mrblog-user-image" src={post?.user.urlImage} alt={post?.user.name} />
+              </div>
               <Link to='/'>
                 <div className="btn btn-primary mrblog-btn">Voltar</div>
               </Link>

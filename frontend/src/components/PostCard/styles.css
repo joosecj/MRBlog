@@ -1,49 +1,6 @@
-.mrblog-card-container {
-    padding: 10px;
-}
 
-.mrblog-card {
-    background-color: var(--bg-light-gray);
-    padding: 16px 41px 7px 40px;
-    margin-bottom: 33px;
-    border-radius: 8px;
-}
-
-.mrblog-card h2 {
-    margin: 0;
-    color: var(--text-green-water);
-    font-size: 1rem;
-    font-weight: 700;
-}
-.mrblog-card p {
-    margin: 0px;
-}
-
-.mrblog-line {
-    border-bottom: 1px solid var(--bg-green-water);
-    font-size: 0.75rem;
-}
-
-.mrblog-date {
-    font-size: 10px;
-}
-
-.mrblog-card-description {
-    margin-top: 8px;
-}
-
-.mrblog-card-description p {
-    margin-bottom: 7px;
-    color: var(--text-gray);
-    font-weight: 400;
-    font-size: 10px;
-    line-height: 15px;
-}
-
-.mrblog-card-description a {
-    color: var(--text-light-pink);
-    /*  maiusculo  text-transform: uppercase; */
-      text-decoration: none; 
+.mrblog-user-image {
+    width: 60%;
 }
 
 .mrblog-btn {
@@ -55,6 +12,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-color: green;
 }
 
 .mrblog-btn:hover {
