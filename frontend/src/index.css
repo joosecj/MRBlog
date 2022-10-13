@@ -25,3 +25,11 @@ a, a:hover {
   text-decoration: none;
   color: unset;
 }
+
+.mrblog-user-card {
+  display: flex;
+}
+
+.mrblog-user-card img {
+  width: 60px;
+}
