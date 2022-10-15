@@ -1,3 +1,30 @@
+.mrblog-user-card {
+    display: flex;
+    border: dotted 1px #51a38d;
+    margin-top: 1.5rem;
+  }
+  
+  .mrblog-user-card img {
+    width: 100px;
+    border-right: dotted 1px #51a38d;
+  }
+
+.mrblog-user-image {
+    margin-right: 10px;
+}
+
+.mrblog-user-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mrblog-user-detail p{
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0px;
+}
+
 .mrblog-btn {
     background-color: var(--bg-green-water);
     font-size: 14px;
@@ -7,9 +34,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: green;
+    border-color: var(--bg-green-water);
+    margin-top: 1.5rem;
 }
 
 .mrblog-btn:hover {
     background-color: #51a38d;
+}
+
+.mrblog-btn bs-btn-active-bg {
+    background-color: var(--bg-green-water);
 }

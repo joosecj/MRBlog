@@ -16,21 +16,23 @@
     font-size: 1.4rem;
     font-weight: 700;
 }
-.mrblog-card p {
-    margin: 0px;
+
+.mrblog-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
 }
+
 
 .mrblog-line {
     border-bottom: 1px solid var(--bg-green-water);
     font-size: 1rem;
+    margin: 0px;
 }
 
 .mrblog-date {
     font-size: 0.85rem;
-}
-
-.mrblog-card-description {
-    margin-top: 10px;
+    font-weight: 400;
+    color: var(--text-gray);
 }
 
 .mrblog-card-description p {
@@ -43,21 +45,5 @@
 
 .mrblog-card-description a {
     color: var(--text-light-pink);
-    /*  maiusculo  text-transform: uppercase; */
       text-decoration: none; 
-}
-
-.mrblog-btn {
-    background-color: var(--bg-green-water);
-    font-size: 14px;
-    font-weight: 700;
-    height: 35px;
-    width: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.mrblog-btn:hover {
-    background-color: #51a38d;
 }

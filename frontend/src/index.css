@@ -26,10 +26,3 @@ a, a:hover {
   color: unset;
 }
 
-.mrblog-user-card {
-  display: flex;
-}
-
-.mrblog-user-card img {
-  width: 60px;
-}
