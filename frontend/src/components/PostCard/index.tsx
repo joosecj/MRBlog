@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Blog } from 'types/blog';
 import { BASE_URL } from 'utils/requests';
 
+
 type Props = {
     postId : string;
 }
@@ -18,6 +19,7 @@ function PostCard({ postId } : Props) {
             setPost(response.data);
         });
     }, [postId]);
+
 
     return (
         <div className="container">
@@ -48,4 +50,4 @@ function PostCard({ postId } : Props) {
     )
 }
 
-export default PostCard
+export default PostCard;

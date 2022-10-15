@@ -14,10 +14,9 @@ export type Blog = {
             name: string;
             email: string;
             birthDate: string;
-            urlImage: string
+            urlImage: string;
             registrationDate: string;
         }
-    
 }
 
 export type BlogPage = {
