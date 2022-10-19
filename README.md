@@ -17,9 +17,10 @@ Projeto implementado na nuvem, com backend no heroku e frontend no netlify.
 
 Experimente live demo completa [aqui](https://i.imgur.com/rok7mYv.mp4) ou deploy no netlify [aqui](https://mrblog-joosecj.netlify.app/).
 
+#### FrontEnd
 ![FrontEnd](https://i.imgur.com/e0KqViv.gif)
 
-
+#### Backend
 ![Bakcend](https://i.imgur.com/lapXMkh.gif)
 
 
@@ -42,6 +43,65 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 4. Collections do postman para fazer as requisições GET/PUT/DELETE E UPDATE para criação da conta, lançar as transações e consultar por movimentações por conta. 
 
    - Link da Collections do postman: https://www.getpostman.com/collections/77d9b404e0cd264cd454
+
+## Requisições (Endpoints)
+
+#### Obs: Para testar as requisições, poderá usar o URL na nuvem ou local que e http://localhost:8080.
+
+   - *Pessoa By Id* - **GET**
+
+   ```bash
+   https://joosecj-mrblog.herokuapp.com/pessoa/1
+   ```
+   ##
+
+- *Posts By Pagead* - **GET**
+
+   ```bash
+   https://joosecj-mrblog.herokuapp.com/posts?size=10&page=0&sort=title
+   ```
+
+   ##
+
+- *New Post -* **POST**
+
+   ```bash
+   https://joosecj-personapi.herokuapp.com/posts
+   ```
+
+   ##
+
+- *Post -* **PUT**
+
+   ```bash
+   https://joosecj-personapi.herokuapp.com/posts/4
+   ```
+
+   ##
+
+- *Posts -* **DELETE**
+
+   ```bash
+   https://joosecj-personapi.herokuapp.com/pessoa/6
+   ```
+
+   ##
+
+- *Corpo da Requisição(Body) -* **JSON** - **PUT** e **POST**
+
+   ```bash
+      {
+         "title": "Abelha Abelha",
+         "titleDescription": "novo posto realizado para testesta",
+         "description": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution  fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution",
+         "category": {
+            "id": 1
+         },
+            "user": {
+            "id": 1
+         }
+      }
+   ```
 
 ### Frontend
 
