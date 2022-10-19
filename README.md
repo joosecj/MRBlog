@@ -66,7 +66,7 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 - *New Post -* **POST**
 
    ```bash
-   https://joosecj-personapi.herokuapp.com/posts
+   https://joosecj-mrblog.herokuapp.com/posts
    ```
 
    ##
@@ -74,7 +74,7 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 - *Post -* **PUT**
 
    ```bash
-   https://joosecj-personapi.herokuapp.com/posts/4
+   https://joosecj-mrblog.herokuapp.com/posts/4
    ```
 
    ##
@@ -82,7 +82,7 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 - *Posts -* **DELETE**
 
    ```bash
-   https://joosecj-personapi.herokuapp.com/pessoa/6
+   https://joosecj-mrblog.herokuapp.com/pessoa/6
    ```
 
    ##
