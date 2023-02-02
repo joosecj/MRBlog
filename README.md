@@ -33,7 +33,7 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 
 1. Clone o código fonte
    ```bash
-   git@github.com:joosecj/MRBlog.git
+   git clone git@github.com:joosecj/MRBlog.git
    ```
 
 2. Em sua IDE de preferência(utilizei Intellij), importe a pasta **backend** e faça o update das dependências do **maven**.
