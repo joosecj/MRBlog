@@ -91,8 +91,10 @@ public class PostService {
                     -> new ResourceNotFoundException("Recurso não encontrado"));
             postEntity.setCategory(categoryRepository.save(categoryEntity));
             return new PostCategoryDTO(postRepository.save(postEntity));
-        } catch (EntityNotFoundException e) {
+        } catch (NullPointerException e) {
             throw new ResourceNotFoundException("Usuário não encontrado");
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Post não encontrado");
         }
     }
 
