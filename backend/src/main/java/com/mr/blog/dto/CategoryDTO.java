@@ -9,7 +9,7 @@ public class CategoryDTO {
     @Size(min = 3, max = 40, message = "Nome precisar ter mínimo 3 e máximo 40 caracteres")
     @NotBlank(message = "Campo requerido")
     private String name;
-    @Size(min = 10, max = 50, message = "Descrição precisar ter mínimo 3 e máximo 40 caracteres")
+    @Size(min = 10, max = 50, message = "Descrição precisar ter mínimo 10 e máximo 50 caracteres")
     @NotBlank(message = "Campo requerido")
     private String description;
 
