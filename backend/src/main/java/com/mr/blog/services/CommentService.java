@@ -1,7 +1,7 @@
 package com.mr.blog.services;
 
-import com.mr.blog.dto.CommentDTO;
-import com.mr.blog.dto.CommentPostUserDTO;
+import com.mr.blog.dto.v1.CommentDTO;
+import com.mr.blog.dto.v1.CommentPostUserDTO;
 import com.mr.blog.entities.Comment;
 import com.mr.blog.entities.Post;
 import com.mr.blog.entities.User;

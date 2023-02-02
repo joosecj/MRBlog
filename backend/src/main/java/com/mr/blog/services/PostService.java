@@ -1,6 +1,9 @@
 package com.mr.blog.services;
 
-import com.mr.blog.dto.*;
+import com.mr.blog.dto.v1.CommentUserDTO;
+import com.mr.blog.dto.v1.PostCategoryDTO;
+import com.mr.blog.dto.v1.PostCategoryUserDTO;
+import com.mr.blog.dto.v1.PostDTO;
 import com.mr.blog.entities.Category;
 import com.mr.blog.entities.Comment;
 import com.mr.blog.entities.Post;
@@ -56,7 +59,7 @@ public class PostService {
         Post postEntity = postRepository.findById(id).orElseThrow(()
                 -> new ResourceNotFoundException("Post não encontrado"));
         List<Comment> commentPage = postEntity.getCommentList();
-        return commentPage.stream().map(x -> new CommentUserDTO(x)).toList();
+        return commentPage.stream().map(CommentUserDTO::new).toList();
     }
 
     @Transactional(readOnly = false)
