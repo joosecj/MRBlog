@@ -38,13 +38,13 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public PostCategoryUserDTO findById(long id) {
-        Post postEntity = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        Post postEntity = postRepository.findById(id).orElseThrow(PostService::postNotFound);
         return new PostCategoryUserDTO(postEntity);
     }
 
     @Transactional(readOnly = true)
     public PostDTO findByIdMin(long id) {
-        Post postEntity = postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
+        Post postEntity = postRepository.findById(id).orElseThrow(PostService::postNotFound);
         return new PostDTO(postEntity);
     }
 
@@ -56,22 +56,21 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public List<CommentUserDTO> findPostByComments(Long id) {
-        Post postEntity = postRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Post não encontrado"));
+        Post postEntity = postRepository.findById(id).orElseThrow(PostService::postNotFound);
         List<Comment> commentPage = postEntity.getCommentList();
         return commentPage.stream().map(CommentUserDTO::new).toList();
     }
 
-    @Transactional(readOnly = false)
+
     public PostCategoryUserDTO insert(PostCategoryUserDTO postCategoryUserDTO) {
         try {
             Post postEntity = new Post();
             copyDtoToEntity(postCategoryUserDTO, postEntity);
-            Category categoryEntity = categoryRepository.findById(postCategoryUserDTO.getCategory().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Caategoria não encontrado"));
+            Long idCategory = postCategoryUserDTO.getCategory().getId();
+            Category categoryEntity = categoryRepository.findById(idCategory).orElseThrow(()
+                    -> new ResourceNotFoundException("Category not found"));
             categoryRepository.save(categoryEntity);
-            User userEntity = userRepository.findById(postCategoryUserDTO.getUser().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Usuário não encontrado"));
+            User userEntity = userRepository.findById(postCategoryUserDTO.getUser().getId()).orElseThrow(PostService::userNotFound);
             userRepository.save(userEntity);
             postEntity.setCategory(categoryEntity);
             postEntity.setUser(userEntity);
@@ -82,16 +81,15 @@ public class PostService {
         }
     }
 
-    @Transactional(readOnly = false)
-    public PostCategoryDTO update(Long id, PostCategoryDTO postCategoryDTO) {
+    public PostCategoryDTO update(Long id, PostCategoryDTO postCategoryDTO) throws ResourceNotFoundException {
         try {
             Post postEntity = postRepository.getReferenceById(id);
             postEntity.setTitle(postCategoryDTO.getTitle());
             postEntity.setTitleDescription(postCategoryDTO.getTitleDescription());
             postEntity.setDescription(postCategoryDTO.getDescription());
             postEntity.setDateTime(Instant.now());
-            Category categoryEntity = categoryRepository.findById(postCategoryDTO.getCategory().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Recurso não encontrado"));
+            Category categoryEntity = categoryRepository.findById(postCategoryDTO.getCategory().getId())
+                    .orElseThrow(PostService::categoryNotFound);
             postEntity.setCategory(categoryRepository.save(categoryEntity));
             return new PostCategoryDTO(postRepository.save(postEntity));
         } catch (NullPointerException e) {
@@ -101,14 +99,14 @@ public class PostService {
         }
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         try {
             postRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Usuário não encontrado");
+            throw new ResourceNotFoundException("User not found");
         } catch (DataIntegrityViolationException e) {
-            throw new DataBaseException("Falha de integridade refencial");
+            throw new DataBaseException("Referential integrity failure");
         }
     }
 
@@ -117,5 +115,17 @@ public class PostService {
         postEntity.setTitleDescription(postCategoryUserDTO.getTitleDescription());
         postEntity.setDescription(postCategoryUserDTO.getDescription());
         postEntity.setDateTime(Instant.now());
+    }
+
+    private static ResourceNotFoundException userNotFound() {
+        return new ResourceNotFoundException("User not found");
+    }
+
+    private static ResourceNotFoundException postNotFound() {
+        return new ResourceNotFoundException("Post not found");
+    }
+
+    private static ResourceNotFoundException categoryNotFound() {
+        return new ResourceNotFoundException("Category not found");
     }
 }

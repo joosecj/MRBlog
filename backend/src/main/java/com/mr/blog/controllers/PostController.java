@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/posts/v1")
+@RequestMapping(value = "/api/posts/v1")
 public class PostController {
     @Autowired
     private PostService postService;

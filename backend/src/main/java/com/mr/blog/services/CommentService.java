@@ -33,7 +33,7 @@ public class CommentService {
     @Transactional(readOnly = true)
     public CommentPostUserDTO findById(long id) {
         Comment commentEntity = commentRepository.findById(id).orElseThrow(()
-                -> new ResourceNotFoundException("Comentário não encontrado"));
+                -> new ResourceNotFoundException("Comments not found"));
         return new CommentPostUserDTO(commentEntity);
     }
 
@@ -43,15 +43,15 @@ public class CommentService {
         return commentPage.map(CommentPostUserDTO::new);
     }
 
-    @Transactional(readOnly = false)
+
     public CommentPostUserDTO insert(CommentPostUserDTO commentPostUserDTO) {
             Comment commentEntity = new Comment();
             copyDtoToEntity(commentPostUserDTO, commentEntity);
             Post postEntity = postRepository.findById(commentPostUserDTO.getPost().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Post não encontrado"));
+                    -> new ResourceNotFoundException("Post not found"));
             postRepository.save(postEntity);
             User userEntity = userRepository.findById(commentPostUserDTO.getUser().getId()).orElseThrow(()
-                    -> new ResourceNotFoundException("Usuário não encontrado"));
+                    -> new ResourceNotFoundException("User not found"));
             userRepository.save(userEntity);
             commentEntity.setPost(postEntity);
             commentEntity.setUser(userEntity);
@@ -59,7 +59,7 @@ public class CommentService {
             return new CommentPostUserDTO(commentEntity);
     }
 
-    @Transactional(readOnly = false)
+
     public CommentDTO update(Long id, CommentDTO commentDTO) {
         try {
             Comment commentEntity = commentRepository.getReferenceById(id);
@@ -67,18 +67,18 @@ public class CommentService {
             commentEntity.setDateTime(Instant.now());
             return new CommentDTO(commentRepository.save(commentEntity));
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Post não encontrado");
+            throw new ResourceNotFoundException("Post not found");
         }
     }
 
-    @Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id) {
         try {
             commentRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("Usuário não encontrado");
+            throw new ResourceNotFoundException("User not found");
         } catch (DataIntegrityViolationException e) {
-            throw new DataBaseException("Falha de integridade refencial");
+            throw new DataBaseException("Referential integrity failure");
         }
     }
 
