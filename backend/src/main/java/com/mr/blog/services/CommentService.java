@@ -67,7 +67,7 @@ public class CommentService {
             commentEntity.setDateTime(Instant.now());
             return new CommentDTO(commentRepository.save(commentEntity));
         } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Post not found");
+            throw new ResourceNotFoundException("Comment not found");
         }
     }
 
@@ -76,7 +76,7 @@ public class CommentService {
         try {
             commentRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new ResourceNotFoundException("User not found");
+            throw new ResourceNotFoundException("Comment not found");
         } catch (DataIntegrityViolationException e) {
             throw new DataBaseException("Referential integrity failure");
         }
