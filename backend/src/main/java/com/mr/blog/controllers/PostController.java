@@ -31,7 +31,7 @@ public class PostController {
                             description = "Success",
                             responseCode = "200",
                             content = {
-                                    @Content(schema = @Schema(implementation = PostCategoryDTO.class))
+                                    @Content(schema = @Schema(implementation = PostCategoryUserDTO.class))
                             }
                     ),
                     @ApiResponse(description = "No Content", responseCode = "204", content = {
@@ -192,7 +192,7 @@ public class PostController {
                             description = "Success",
                             responseCode = "200",
                             content = {
-                                    @Content(schema = @Schema(implementation = CommentUserDTO.class))
+                                    @Content(schema = @Schema(implementation = PostCategoryDTO.class))
                             }
                     ),
                     @ApiResponse(description = "No Content", responseCode = "204", content = {
@@ -222,15 +222,12 @@ public class PostController {
             tags = "Post",
             responses = {
                     @ApiResponse(
-                            description = "Success",
-                            responseCode = "200",
+                            description = "No Content",
+                            responseCode = "204",
                             content = {
-                                    @Content(schema = @Schema(implementation = CommentUserDTO.class))
+                                    @Content(schema = @Schema(implementation = UnionType.class))
                             }
                     ),
-                    @ApiResponse(description = "No Content", responseCode = "204", content = {
-                            @Content(schema = @Schema(implementation = UnionType.class))
-                    }),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = {
                             @Content(schema = @Schema(implementation = UnionType.class))
                     }),
