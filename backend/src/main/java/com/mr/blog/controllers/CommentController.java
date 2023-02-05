@@ -25,7 +25,7 @@ public class CommentController {
     private CommentService commentService;
 
     @Operation(summary = "Find By Id Comment", description = "Find By Id Comment",
-            tags = {"Comment"},
+            tags = "Comment",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -58,7 +58,7 @@ public class CommentController {
     }
 
     @Operation(summary = "Find All Comments", description = "Find By Id Comment",
-            tags = {"Comment"},
+            tags = "Comment",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -91,7 +91,7 @@ public class CommentController {
 
 
     @Operation(summary = "Create Comment and By Category Id and By User Id", description = "Create Comment and By Category and By User Id and By User Id",
-            tags = {"Comment"},
+            tags = "Comment",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -123,7 +123,7 @@ public class CommentController {
     }
 
     @Operation(summary = "Update Comment", description = "Update Comment",
-            tags = {"Comment"},
+            tags = "Comment",
             responses = {
                     @ApiResponse(
                             description = "Success",
@@ -155,7 +155,7 @@ public class CommentController {
     }
 
     @Operation(summary = "Delete By Id Comment", description = "Delete By Id Comment",
-            tags = {"Comment"},
+            tags = "Comment",
             responses = {
                     @ApiResponse(
                             description = "No Content",

@@ -24,7 +24,7 @@ public class CategoryController {
   private CategoryServices categoryServices;
 
   @Operation(summary = "Find By Id Category", description = "Find By Id Category",
-          tags = {"Category"},
+          tags = "Category",
           responses = {
                   @ApiResponse(
                           description = "Success",
@@ -56,7 +56,7 @@ public class CategoryController {
   }
 
   @Operation(summary = "Find All Category", description = "Find All Category",
-          tags = {"Category"},
+          tags = "Category",
           responses = {
                   @ApiResponse(
                           description = "Success",
@@ -87,7 +87,8 @@ public class CategoryController {
     return ResponseEntity.ok(categoryServices.findAll(pageable));
   }
 
-  @Operation(summary = "Create Category", description = "Create Category", tags = {"Category"},
+  @Operation(summary = "Create Category", description = "Create Category",
+          tags = "Category",
           responses = {
                   @ApiResponse(
                           description = "Success",
@@ -116,7 +117,7 @@ public class CategoryController {
   }
 
   @Operation(summary = "Update By Id Category", description = "Update By Id Category",
-          tags = {"Category"},
+          tags = "Category",
           responses = {
                   @ApiResponse(
                           description = "Success",
@@ -148,7 +149,7 @@ public class CategoryController {
   }
 
   @Operation(summary = "Delete By Id Category", description = "Delete By Id Category",
-          tags = {"Category"},
+          tags = "Category",
           responses = {
                   @ApiResponse(
                           description = "No Content",
