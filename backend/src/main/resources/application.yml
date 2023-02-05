@@ -1,7 +1,9 @@
+cors:
+  originPatterns: https://mrblog-production.up.railway.app, http://localhost:3000, http://localhost:8080
+
 spring:
   application:
     name: MRBlog
-
   h2:
     console:
       enabled: true
@@ -25,3 +27,8 @@ springdoc:
     - /auth/**
   swagger-ui:
     use-root-path: true
+#
+#
+#cors:
+#  origins: https://mrblog-production.up.railway.app/, http://localhost:3000, http://localhost:5173
+#
