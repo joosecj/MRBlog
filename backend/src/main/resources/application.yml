@@ -27,3 +27,4 @@ springdoc:
     - /auth/**
   swagger-ui:
     use-root-path: true
+    config-url: https://mrblog-production.up.railway.app
