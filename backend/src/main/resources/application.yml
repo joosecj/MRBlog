@@ -1,5 +1,5 @@
 cors:
-  originPatterns: https://mrblog-production.up.railway.app/, http://localhost:3000, http://localhost:8080
+  originPatterns: http://localhost:3000, http://localhost:8080
 
 spring:
   application:
@@ -27,3 +27,5 @@ springdoc:
     - /auth/**
   swagger-ui:
     use-root-path: true
+server:
+  forward-headers-strategy: framework
