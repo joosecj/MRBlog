@@ -16,13 +16,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Value("${cors.originPatterns:default}")
+  @Value("${cors.originPatterns}")
   private String corsOriginPatterns;
 
 
@@ -49,10 +48,10 @@ public class SecurityConfig {
     String[] origins = corsOriginPatterns.split(",");
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.setAllowedOrigins(Arrays.asList(origins));
-    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
+//    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
     corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
     corsConfig.setAllowCredentials(true);
-    corsConfig.setAllowedHeaders(List.of("Access-Control-Allow-Origin"));
+    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "*"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", corsConfig);
