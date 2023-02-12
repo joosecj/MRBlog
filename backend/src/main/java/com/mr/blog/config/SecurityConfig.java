@@ -1,6 +1,5 @@
 package com.mr.blog.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -22,11 +21,15 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Value("${cors.originPatterns:default}")
+  @Value("${cors.originPatterns:default}, https://mrblog-joosecj.netlify.app")
   private String corsOriginPatterns;
 
-  @Autowired
-  private Environment env;
+
+  private final Environment env;
+
+  public SecurityConfig(Environment env) {
+    this.env = env;
+  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
