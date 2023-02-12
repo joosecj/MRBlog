@@ -21,7 +21,7 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Value("${cors.originPatterns:default}, https://mrblog-joosecj.netlify.app")
+  @Value("${cors.originPatterns:default}")
   private String corsOriginPatterns;
 
 
