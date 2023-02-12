@@ -16,6 +16,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -50,8 +51,8 @@ public class SecurityConfig {
     corsConfig.setAllowedOrigins(Arrays.asList(origins));
     corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
     corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
-//    corsConfig.setAllowCredentials(true);
-//    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+    corsConfig.setAllowCredentials(true);
+    corsConfig.setAllowedHeaders(List.of("Access-Control-Allow-Origin"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", corsConfig);
