@@ -24,18 +24,17 @@ public class SecurityConfig {
   @Value("${cors.originPatterns}")
   private String corsOriginPatterns;
 
-
-  private final Environment env;
-
-  public SecurityConfig(Environment env) {
-    this.env = env;
-  }
+//  private final Environment env;
+//
+//  public SecurityConfig(Environment env) {
+//    this.env = env;
+//  }
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-      http.headers().frameOptions().disable();
-    }
+//    if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+//      http.headers().frameOptions().disable();
+//    }
     http.cors().configurationSource(corsConfigurationSource());
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -44,14 +43,13 @@ public class SecurityConfig {
   }
 
   @Bean
-  CorsConfigurationSource corsConfigurationSource() {
+  public CorsConfigurationSource corsConfigurationSource() {
     String[] origins = corsOriginPatterns.split(",");
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.setAllowedOrigins(Arrays.asList(origins));
-    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
+//    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
     corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
     corsConfig.setAllowCredentials(true);
-    corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "*"));
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", corsConfig);
