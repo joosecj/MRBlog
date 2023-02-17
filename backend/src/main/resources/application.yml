@@ -1,5 +1,5 @@
 cors:
-  originPatterns: {http://localhost:3000, http://localhost:8080, https://mrblog-joosecj.netlify.app, http://localhost:5173}
+  originPatterns: http://localhost:3000, http://localhost:8080, https://mrblog-joosecj.netlify.app, http://localhost:5173
 
 spring:
   application:
