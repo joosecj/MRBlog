@@ -48,7 +48,7 @@ public class SecurityConfig {
     String[] origins = corsOriginPatterns.split(",");
     CorsConfiguration corsConfig = new CorsConfiguration();
     corsConfig.setAllowedOrigins(Arrays.asList(origins));
-//    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
+    corsConfig.setAllowedOriginPatterns(Arrays.asList(origins));
     corsConfig.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "PATCH"));
     corsConfig.setAllowCredentials(true);
     corsConfig.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "*"));
