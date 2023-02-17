@@ -31,18 +31,6 @@ public class SecurityConfig {
 //  }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//    if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
-//      http.headers().frameOptions().disable();
-//    }
-    http.cors().configurationSource(corsConfigurationSource());
-    http.csrf().disable();
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
-    return http.build();
-  }
-
-  @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     String[] origins = corsOriginPatterns.split(",");
     CorsConfiguration corsConfig = new CorsConfiguration();
@@ -54,6 +42,17 @@ public class SecurityConfig {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", corsConfig);
     return source;
+  }
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//    if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+//      http.headers().frameOptions().disable();
+//    }
+    http.cors().configurationSource(corsConfigurationSource());
+    http.csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+    return http.build();
   }
 
   @Bean
