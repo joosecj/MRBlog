@@ -20,8 +20,11 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = "/api/categories/v1")
 public class CategoryController {
+  private final CategoryServices categoryServices;
   @Autowired
-  private CategoryServices categoryServices;
+  public CategoryController(CategoryServices categoryServices) {
+    this.categoryServices = categoryServices;
+  }
 
   @Operation(summary = "Find By Id Category", description = "Find By Id Category",
           tags = "Category",
