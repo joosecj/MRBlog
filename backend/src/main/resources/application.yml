@@ -20,10 +20,16 @@ spring:
         show_sql: true
         format_sql: true
 
+security:
+  jwt:
+    token:
+      secret-key: 53cr37
+      expire-length: 3600000
 
 springdoc:
   paths-to-match:
     - /api/**/v1/**
+    - /oauth/**
   swagger-ui:
     use-root-path: true
 server:

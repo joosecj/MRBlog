@@ -1,37 +1,28 @@
 package com.mr.blog.controllers;
 
 import com.mr.blog.dto.v1.AccountCredentialsDTO;
-import com.mr.blog.dto.v1.CategoryDTO;
+import com.mr.blog.services.OauthService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-
 
 @RestController
-@RequestMapping("/auth")
-class AuthController {
-
+@RequestMapping("/oauth")
+public class OauthController {
   @Autowired
-  private AuthService authService;
+  private OauthService oauthService;
 
-
-  @Operation(summary = "Authenticates an user and return a token", description = "",
+  @Operation(summary = "Authenticates an user and return a token",
+          description = "Authenticates an user and return a token",
           tags = "Oauth"
   )
-  @PostMapping(value = "/api/categories/v1")
-  public void signin(AccountCredentialsDTO data) {
-    return if (data.getUserName().isBlank() || data.getPassword().isBlank())
-    ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request");
-            else authService.signin(data);
+  @PostMapping(value = "/signin")
+  public ResponseEntity<AccountCredentialsDTO> signin(AccountCredentialsDTO data) {
+    oauthService.signin(data);
+    return ResponseEntity.ok(data);
   }
 
 }

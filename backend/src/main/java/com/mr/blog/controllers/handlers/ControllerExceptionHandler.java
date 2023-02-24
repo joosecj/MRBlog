@@ -24,6 +24,8 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(status).body(error);
     }
 
+
+
     @ExceptionHandler(DataBaseException.class)
     public ResponseEntity<CustomError> dataBase(DataBaseException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;

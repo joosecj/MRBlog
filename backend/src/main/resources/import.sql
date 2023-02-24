@@ -1,5 +1,13 @@
-INSERT INTO tb_user (name, email, birth_date, url_image, registration_date) VALUES ('Antonio Carlos', 'antonio@gmail.com', '1990-05-17',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2022-10-01');
-INSERT INTO tb_user (name, email, birth_date, url_image, registration_date) VALUES ('Clara Rita', 'rita@gmail.com', '1980-05-17',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2022-10-01');
+
+INSERT INTO tb_user (name, email, password, birth_date, url_image, registration_date, account_non_expired, account_non_locked, credentials_non_expired, enabled) VALUES ('Antonio Carlos', 'antonio@gmail.com', 'c0d6b7b7a97ac701f5466a38e317e49f2647f99b9f2f1e9a9f2c652a73e3ac0a60644e0f25db642f', '1990-05-17',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2022-10-01', 1, 1, 1, 1);
+INSERT INTO tb_user (name, email, password, birth_date, url_image, registration_date, account_non_expired, account_non_locked, credentials_non_expired, enabled) VALUES ('Clara Rita', 'rita@gmail.com', 'c0d6b7b7a97ac701f5466a38e317e49f2647f99b9f2f1e9a9f2c652a73e3ac0a60644e0f25db642f', '1998-10-07',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2023-01-15', 1, 1, 1, 1);
+
+INSERT INTO tb_permission (description) VALUES ('ADMIN');
+INSERT INTO tb_permission (description) VALUES  ('MANAGER');
+INSERT INTO tb_permission (description) VALUES ('COMMON_USER');
+
+-- INSERT INTO tb_user (name, email, birth_date, url_image, registration_date) VALUES ('Antonio Carlos', 'antonio@gmail.com', '1990-05-17',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2022-10-01');
+-- INSERT INTO tb_user (name, email, birth_date, url_image, registration_date) VALUES ('Clara Rita', 'rita@gmail.com', '1980-05-17',  'https://avatars.githubusercontent.com/u/109112608?v=4', '2022-10-01');
 
 INSERT INTO tb_category (name, description) VALUES ('Economia', 'The standard chunk');
 INSERT INTO tb_category (name, description) VALUES ('Esporte', 'Contrary to popular');
