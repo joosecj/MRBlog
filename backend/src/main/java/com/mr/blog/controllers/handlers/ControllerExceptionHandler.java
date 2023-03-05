@@ -3,6 +3,7 @@ package com.mr.blog.controllers.handlers;
 import com.mr.blog.dto.v1.handlerDTO.CustomError;
 import com.mr.blog.dto.v1.handlerDTO.ValidationError;
 import com.mr.blog.services.exeptions.DataBaseException;
+import com.mr.blog.services.exeptions.InvalidJwtAuthenticationException;
 import com.mr.blog.services.exeptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.hibernate.exception.ConstraintViolationException;
@@ -12,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 
 import java.time.Instant;
 
@@ -46,6 +48,14 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public final ResponseEntity<CustomError> handleConstraintViolationException(ConstraintViolationException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomError error = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<CustomError> handleInvalidJwtAuthenticationExceptions(
+            Exception e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
         CustomError error = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }

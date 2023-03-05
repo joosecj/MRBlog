@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
@@ -38,9 +39,17 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private List<Permission> permissions = new ArrayList<>();
-    private List<String> roles = new ArrayList<>();
+
 
     public User() {
+    }
+
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        for (Permission permission : permissions) {
+            roles.add(permission.getDescription());
+        }
+        return roles;
     }
 
     public User(Long id, String name, String email, LocalDate birthDate, String urlImage, LocalDate registrationDate) {
@@ -143,9 +152,8 @@ public class User implements UserDetails {
         return commentList;
     }
 
-    public List<String> getRoles() {
-        permissions.forEach(x -> roles.add(x.getDescription()));
-        return roles;
+    public List<Permission> getPermissions() {
+        return permissions;
     }
 
 
@@ -182,5 +190,18 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(permissions, user.permissions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, permissions);
     }
 }

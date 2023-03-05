@@ -12,10 +12,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OauthService {
+public class AuthService {
   @Autowired
   private UserRepository userRepository;
   @Autowired
@@ -23,19 +24,28 @@ public class OauthService {
   @Autowired
   private JwtTokenProvider tokenProvider;
 
-  public ResponseEntity<TokenDTO> signin(AccountCredentialsDTO data) {
+  public TokenDTO signin(AccountCredentialsDTO data) {
     try {
-      var email = data.getEmail();
-      var password = data.getPassword();
+      String email = data.getEmail();
+      String password = data.getPassword();
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
       User user = userRepository.findByEmail(email);
       if (user != null) {
-        return ResponseEntity.ok(tokenProvider.createAccesToken(email, user.getRoles()));
+        return tokenProvider.createAccessToken(email, user.getRoles());
       } else {
-        throw new ResourceNotFoundException("Username not found");
+        throw new ResourceNotFoundException("Email not found");
       }
     } catch (AuthenticationException e) {
-      throw new BadCredentialsException("Invalid username or password supplied!");
+      throw new BadCredentialsException("Invalid email or password supplied!");
+    }
+  }
+
+  public TokenDTO refreshToken(String email, String refreshToken) {
+    var user = userRepository.findByEmail(email);
+    if (user != null) {
+      return tokenProvider.refreshToken(refreshToken);
+    } else {
+      throw new UsernameNotFoundException("Email " + email + " not found!");
     }
   }
 }

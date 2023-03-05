@@ -3,6 +3,8 @@ package com.mr.blog.entities;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "tb_permission")
 public class Permission implements GrantedAuthority {
@@ -37,5 +39,18 @@ public class Permission implements GrantedAuthority {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Permission that = (Permission) o;
+    return Objects.equals(id, that.id) && Objects.equals(description, that.description);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, description);
   }
 }

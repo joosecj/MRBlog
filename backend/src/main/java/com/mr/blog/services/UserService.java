@@ -26,6 +26,10 @@ public class UserService implements UserDetailsService {
   @Autowired
   private UserRepository userRepository;
 
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+
   @Transactional(readOnly = true)
   public UserDTO findById(long id) {
     User userEntity = userRepository.findById(id)
@@ -85,7 +89,12 @@ public class UserService implements UserDetailsService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return userRepository.findByEmail(username);
+  public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+    var user = userRepository.findByEmail(userEmail);
+    if (user != null) {
+      return user;
+    } else {
+      throw new UsernameNotFoundException("email " + userEmail + " not found");
+    }
   }
 }
