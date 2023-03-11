@@ -60,6 +60,7 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.0.3</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
@@ -69,11 +70,7 @@
             <artifactId>java-jwt</artifactId>
             <version>4.2.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.mr</groupId>
-            <artifactId>Blog</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
     </dependencies>
 
     <build>
