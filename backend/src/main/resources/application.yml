@@ -1,5 +1,5 @@
 cors:
-  originPatterns: http://localhost:3000, http://localhost:8080, https://mrblog-joosecj.netlify.app, http://localhost:5173
+  originPatterns: http://localhost:8080,https://mrblog-joosecj.netlify.app,http://localhost:5173
 
 spring:
   application:
@@ -28,8 +28,8 @@ security:
 
 springdoc:
   paths-to-match:
+    - /auth/**
     - /api/**/v1/**
-    - /oauth/**
   swagger-ui:
     use-root-path: true
 server:

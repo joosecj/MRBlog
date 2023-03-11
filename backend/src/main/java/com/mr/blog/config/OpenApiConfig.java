@@ -14,7 +14,7 @@ public class OpenApiConfig {
             .info(
                     new Info()
                             .title("RESTFul Api with java 17 and Spring Boot 3.0.2")
-                            .version("v1")
+                            .version("v0.0.1")
                             .description("Project MRBlog")
                             .termsOfService("https://github.com/joosecj/MRBlog")
                             .license(
@@ -23,5 +23,4 @@ public class OpenApiConfig {
                             )
             );
   }
-
 }
