@@ -30,7 +30,7 @@ Criar e executar o projeto em seu ambiente de desenvolvimento local é muito fá
 
 ### Backend
 
-1. Clone o código fonte
+1. Clone o código fonte.
    ```bash
    git clone git@github.com:joosecj/MRBlog.git
    ```
